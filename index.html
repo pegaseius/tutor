@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南大法学院硕士生导师选择工具</title>
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom, #FFFAFA, #D8BFD8); 
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select {
+            width: 25%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            width: 10%;
+            padding: 10px;
+            background-color: #8470FF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: #6A5ACD;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        #result ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #result li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        #result li:last-child {
+            margin-bottom: 0;
+        }
+
+        p {
+            text-align: center;
+            color: #111;
+        }
+    </style>
+</head>
+<body>
+    <h1>南京大学法学院</h1>
+    <h1>选择你理想的硕士导师</h1>
+    <form id="teacherForm">
+        <div>
+            <label for="researchField">你希望你的导师是研究什么领域的？</label><br>
+            <select id="researchField">
+                <option value="无所谓">无所谓</option>
+                <option value="民法">民法</option>
+                <option value="商法">商法</option>
+                <option value="经济法">经济法</option>
+                <option value="刑法">刑法</option>
+                <option value="民事诉讼法">民事诉讼法</option>
+                <option value="刑事诉讼法">刑事诉讼法</option>
+                <option value="行政法">行政法</option>
+                <option value="宪法">宪法</option>
+                <option value="国际公法">国际公法</option>
+                <option value="国际私法">国际私法</option>
+                <option value="国际经济法">国际经济法</option>
+                <option value="法理学">法理学</option>
+                <option value="法制史">法制史</option>
+                <option value="知识产权法">知识产权法</option>
+            </select>
+        </div>
+        <div>
+            <label for="gender">你希望你的导师是男性还是女性？</label><br>
+            <select id="gender">
+                <option value="无所谓">无所谓</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </div>
+        <div>
+            <label for="ageGroup">你希望你的导师是青年人、中年人还是老年人？</label><br>
+            <select id="ageGroup">
+                <option value="无所谓">无所谓</option>
+                <option value="中年">中年</option>
+                <option value="青年">青年</option>
+                <option value="老年">老年</option>
+            </select>
+        </div>
+        <div>
+            <label for="title">你希望你的导师职称是什么？</label><br>
+            <select id="title">
+                <option value="无所谓">无所谓</option>
+                <option value="教授">教授</option>
+                <option value="副教授">副教授</option>
+                <option value="讲师">讲师</option>
+            </select>
+        </div>
+        <div>
+            <label for="isDoctoralSupervisor">你希望你的导师同时是博导吗？</label><br>
+            <select id="isDoctoralSupervisor">
+                <option value="无所谓">无所谓</option>
+                <option value="是的">是的</option>
+                <option value="不是">不是</option>
+            </select>
+        </div>
+        <div>
+            <label for="isAdministrative">你希望你的导师同时担任学院行政工作吗？</label><br>
+            <select id="isAdministrative">
+                <option value="无所谓">无所谓</option>
+                <option value="否">否</option>
+                <option value="是">是</option>
+            </select>
+        </div>
+        <button type="button" onclick="submitForm()">提交</button>
+    </form>
+
+    <div id="result">
+
+    </div>
+
+    <script>
+        // 教师数据
+        var teachers = [
+            { name: "陈坤", researchField: "法理学", gender: "男", ageGroup: "青年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: true },
+            { name: "狄小华", researchField: "刑事诉讼法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "范健", researchField: "商法", gender: "男", ageGroup: "老年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "方小敏", researchField: "经济法", gender: "女", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "王建文", researchField: "商法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "胡晓红", researchField: "国际经济法", gender: "女", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "金俭", researchField: "经济法", gender: "女", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "李友根", researchField: "经济法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "吕炳斌", researchField: "知识产权法", gender: "男", ageGroup: "青年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "缪因知", researchField: "经济法", gender: "男", ageGroup: "青年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "彭岳", researchField: "国际经济法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: true },
+            { name: "秦宗文", researchField: "刑事诉讼法", gender: "男", ageGroup: "青年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "邵建东", researchField: "经济法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "宋晓", researchField: "国际私法", gender: "男", ageGroup: "青年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "宋亚辉", researchField: "经济法", gender: "男", ageGroup: "青年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "孙国祥", researchField: "刑法", gender: "男", ageGroup: "老年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "单勇", researchField: "刑法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "单锋", researchField: "刑法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "孙雯", researchField: "国际经济法", gender: "女", ageGroup: "青年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "王太高", researchField: "行政法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "吴卫星", researchField: "行政法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "肖泽晟", researchField: "行政法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "徐棣枫", researchField: "知识产权法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "解亘", researchField: "民法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "严仁群", researchField: "民事诉讼法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "叶金强", researchField: "民法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "张仁善", researchField: "法制史", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "张春海", researchField: "法制史", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "张华", researchField: "国际公法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "张春海", researchField: "法制史", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "张婉苏", researchField: "经济法", gender: "女", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "赵娟", researchField: "宪法", gender: "女", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "周安平", researchField: "法理学", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "曾洋", researchField: "商法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "朱庆育", researchField: "民法", gender: "男", ageGroup: "中年组", title: "教授", isDoctoralSupervisor: true, isAdministrative: false },
+            { name: "蔡琳", researchField: "法理学", gender: "女", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "冯洁语", researchField: "民法", gender: "男", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "郭俊义", researchField: "法理学", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "何鹰", researchField: "国际经济法", gender: "女", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "黄秀梅", researchField: "经济法", gender: "女", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "黄旭巍", researchField: "刑法", gender: "男", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "焦燕", researchField: "国际私法", gender: "女", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "李斌", researchField: "国际公法", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "李华", researchField: "商法", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "刘勇", researchField: "民法", gender: "男", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: true },
+{ name: "齐晓琨", researchField: "民法", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "马春晓", researchField: "刑法", gender: "男", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "尚连杰", researchField: "民法", gender: "男", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "田芳", researchField: "宪法", gender: "女", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "熊静波", researchField: "法理学", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "徐凌波", researchField: "刑法", gender: "女", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "杨辉忠", researchField: "刑法", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "岳卫", researchField: "经济法", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "张力毅", researchField: "经济法", gender: "男", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "张淼", researchField: "刑法", gender: "男", ageGroup: "青年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "张慰", researchField: "宪法", gender: "女", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "张燕玲", researchField: "民法", gender: "女", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "周长征", researchField: "经济法", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "邹立君", researchField: "法理学", gender: "女", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "张理", researchField: "经济法", gender: "女", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false },
+{ name: "张复友", researchField: "刑事诉讼法", gender: "男", ageGroup: "中年组", title: "副教授", isDoctoralSupervisor: false, isAdministrative: false }
+
+        ];
+
+        function submitForm() {
+            // 获取学生选择的答案
+            var researchField = document.getElementById("researchField").value;
+            var gender = document.getElementById("gender").value;
+            var ageGroup = document.getElementById("ageGroup").value;
+            var title = document.getElementById("title").value;
+            var isDoctoralSupervisor = document.getElementById("isDoctoralSupervisor").value;
+            var isAdministrative = document.getElementById("isAdministrative").value;
+
+            // 根据学生选择的答案从教师信息库中筛选教师
+            var filteredTeachers = teachers.filter(function(teacher) {
+                return (researchField === "无所谓" || teacher.researchField.includes(researchField)) &&
+                    (gender === "无所谓" || teacher.gender === gender) &&
+                    (ageGroup === "无所谓" || teacher.ageGroup.includes(ageGroup)) &&
+                    (title === "无所谓" || teacher.title === title) &&
+                    (isDoctoralSupervisor === "无所谓" || (isDoctoralSupervisor === "是的" ? teacher.isDoctoralSupervisor : true)) &&
+                    (isAdministrative === "无所谓" || (isAdministrative === "是" ? teacher.isAdministrative : true));
+            });
+
+            // 显示结果
+            displayResult(filteredTeachers);
+        }
+
+        function displayResult(teachers) {
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "<h2>最接近你选择的导师：</h2>";
+            if (teachers.length > 0) {
+                var ul = document.createElement("ul");
+                teachers.slice(0, 100).forEach(function(teacher) {
+                    var li = document.createElement("li");
+                    li.textContent = "姓名：" + teacher.name + "，性别：" + teacher.gender + "，年龄组：" + teacher.ageGroup + "，是否为博导：" + (teacher.isDoctoralSupervisor ? "是" : "否") + "，是否担任学院行政：" + (teacher.isAdministrative ? "是" : "否");
+                    ul.appendChild(li);
+                });
+                resultDiv.appendChild(ul);
+            } else {
+                resultDiv.innerHTML += "<p>抱歉，没有找到符合条件的导师。</p>";
+            }
+        }
+    </script>
+    <div style="text-align:center;"><p>导师数据来自法学院官网，截止2022年</p></div>
+    <div style="text-align:center;"><p>南京大学法学院Chollima制作</p></div>
+<div style="text-align:center;"><p>©2024 禁止用于营利目的</p></div>
+</body>
+</html>
